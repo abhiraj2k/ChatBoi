@@ -1,17 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import reduxThunk from "redux-thunk";
+import firebase from "firebase";
+import reducers from "./reducers";
+import App from "./components/App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+// Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyD0GMZiiM3CYrzz_tBJtcmiQIRiIHI0xSU",
+  authDomain: "chatboi-766d4.firebaseapp.com",
+  databaseURL: "https://chatboi-766d4.firebaseio.com",
+  projectId: "chatboi-766d4",
+  storageBucket: "chatboi-766d4.appspot.com",
+  messagingSenderId: "171947434351",
+  appId: "1:171947434351:web:4d17c83618a008ddb6c89a",
+  measurementId: "G-76ZD1G3NMS",
+};
+firebase.initializeApp(firebaseConfig);
+
+// Redux Dev Tools enabled
+const composeEnhancers =
+  (typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+// Setting Up redux Store
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(reduxThunk))
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);
