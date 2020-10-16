@@ -1,4 +1,4 @@
-## Look At console for Erors and all dispatched Actions
+## Look ct console for Errors and all dispatched Actions
 
 ## Available Scripts
 
