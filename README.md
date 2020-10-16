@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Look At console for Erors and all dispatched Actions
 
 ## Available Scripts
 
